@@ -38,6 +38,29 @@ echo "Unreal Build.sh: $BUILD_SH"
 echo "Cleaning generated Unreal folders..."
 rm -rf "$PROJECT_DIR/Binaries" "$PROJECT_DIR/Intermediate" "$PROJECT_DIR/Saved" "$PROJECT_DIR/DerivedDataCache"
 
+echo "Checking local Mac toolchain..."
+if command -v xcode-select >/dev/null 2>&1; then
+  xcode-select -p || true
+fi
+if command -v xcodebuild >/dev/null 2>&1; then
+  xcodebuild -version || true
+  xcodebuild -showsdks || true
+fi
+
+echo "Checking Unreal Mac platform support files..."
+ENGINE_ROOT="$(cd "$(dirname "$BUILD_SH")/../../../.." && pwd)"
+MAC_PLATFORM_INFO="$ENGINE_ROOT/Platforms/Mac/Config/DataDrivenPlatformInfo.ini"
+MAC_SDK_JSON="$ENGINE_ROOT/Platforms/Mac/Config/SDK.json"
+if [[ ! -f "$MAC_PLATFORM_INFO" ]]; then
+  echo "Missing Unreal Mac platform info: $MAC_PLATFORM_INFO" >&2
+  echo "This Unreal install does not appear to include Mac platform support, or the install is incomplete." >&2
+  echo "Open Epic Games Launcher > Unreal Engine > UE_5.7 > Options and make sure Mac platform support is installed, then Verify the engine install." >&2
+  exit 2
+fi
+if [[ ! -f "$MAC_SDK_JSON" ]]; then
+  echo "Warning: missing Unreal Mac SDK descriptor: $MAC_SDK_JSON" >&2
+fi
+
 echo "Building UnrealPopeEditor for Mac Development..."
 "$BUILD_SH" UnrealPopeEditor Mac Development -Project="$PROJECT_FILE" -WaitMutex
 
