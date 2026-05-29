@@ -47,6 +47,16 @@ if command -v xcodebuild >/dev/null 2>&1; then
   xcodebuild -showsdks || true
 fi
 
+if command -v xcrun >/dev/null 2>&1; then
+  if ! xcrun --find metal >/dev/null 2>&1; then
+    echo "Missing Xcode Metal Toolchain. Install it with:" >&2
+    echo "  xcodebuild -downloadComponent MetalToolchain" >&2
+    echo "Then rerun this script." >&2
+    exit 3
+  fi
+  echo "Metal compiler: $(xcrun --find metal)"
+fi
+
 echo "Checking Unreal Mac platform support files..."
 ENGINE_ROOT="$(cd "$(dirname "$BUILD_SH")/../../.." && pwd)"
 MAC_PLATFORM_INFO="$ENGINE_ROOT/Platforms/Mac/Config/DataDrivenPlatformInfo.ini"
