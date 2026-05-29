@@ -37,10 +37,21 @@ git clone https://github.com/waitholdthis/unreal_pope.git
 cd unreal_pope
 ```
 
-Open:
+A fresh C++ Unreal repo does not commit `Binaries/`, so Unreal may say the `UnrealPope` module is missing or built with a different engine version. That is normal until the module is compiled locally.
+
+Manual rebuild:
 
 ```bash
+chmod +x Scripts/mac-rebuild.sh
+./Scripts/mac-rebuild.sh
 open UnrealPope.uproject
+```
+
+If your Unreal install is not in the default Launcher path, set `UNREAL_BUILD_SH` first:
+
+```bash
+export UNREAL_BUILD_SH="/Users/Shared/Epic Games/UE_5.7/Engine/Build/BatchFiles/Mac/Build.sh"
+./Scripts/mac-rebuild.sh
 ```
 
 If Unreal asks to rebuild modules, choose yes.
