@@ -59,10 +59,28 @@ fi
 
 echo "Checking Unreal Mac platform support files..."
 ENGINE_ROOT="$(cd "$(dirname "$BUILD_SH")/../../.." && pwd)"
-MAC_PLATFORM_INFO="$ENGINE_ROOT/Platforms/Mac/Config/DataDrivenPlatformInfo.ini"
-MAC_SDK_JSON="$ENGINE_ROOT/Platforms/Mac/Config/SDK.json"
-if [[ ! -f "$MAC_PLATFORM_INFO" ]]; then
-  echo "Missing Unreal Mac platform info: $MAC_PLATFORM_INFO" >&2
+MAC_PLATFORM_INFO=""
+for candidate in \
+  "$ENGINE_ROOT/Platforms/Mac/Config/DataDrivenPlatformInfo.ini" \
+  "$ENGINE_ROOT/Config/Mac/DataDrivenPlatformInfo.ini"; do
+  if [[ -f "$candidate" ]]; then
+    MAC_PLATFORM_INFO="$candidate"
+    break
+  fi
+done
+
+MAC_SDK_JSON=""
+for candidate in \
+  "$ENGINE_ROOT/Platforms/Mac/Config/SDK.json" \
+  "$ENGINE_ROOT/Config/Mac/SDK.json"; do
+  if [[ -f "$candidate" ]]; then
+    MAC_SDK_JSON="$candidate"
+    break
+  fi
+done
+
+if [[ -z "$MAC_PLATFORM_INFO" ]]; then
+  echo "Missing Unreal Mac platform DataDrivenPlatformInfo.ini." >&2
   echo "This Unreal install does not appear to include Mac platform support, or the install is incomplete." >&2
   echo "Engine root detected as: $ENGINE_ROOT" >&2
   echo "Existing Engine/Platforms entries:" >&2
@@ -72,8 +90,12 @@ if [[ ! -f "$MAC_PLATFORM_INFO" ]]; then
   echo "Open Epic Games Launcher > Unreal Engine > UE_5.7 > Options and make sure Mac platform support is installed, then Verify the engine install." >&2
   exit 2
 fi
-if [[ ! -f "$MAC_SDK_JSON" ]]; then
-  echo "Warning: missing Unreal Mac SDK descriptor: $MAC_SDK_JSON" >&2
+
+echo "Mac platform info: $MAC_PLATFORM_INFO"
+if [[ -n "$MAC_SDK_JSON" ]]; then
+  echo "Mac SDK descriptor: $MAC_SDK_JSON"
+else
+  echo "Warning: missing Unreal Mac SDK descriptor; continuing because DataDrivenPlatformInfo.ini exists." >&2
 fi
 
 echo "Building UnrealPopeEditor for Mac Development..."
