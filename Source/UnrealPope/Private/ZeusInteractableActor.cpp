@@ -16,6 +16,6 @@ void AZeusInteractableActor::Interact_Implementation(AActor* InstigatorActor)
 {
     if (GEngine)
     {
-        GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor::Gold, InteractionMessage.ToString());
+        GEngine->AddOnScreenDebugMessage(-1, 2.0f, FColor(255, 215, 0), InteractionMessage.ToString());
     }
 }
