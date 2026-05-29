@@ -12,7 +12,6 @@
   ],
   "Plugins": [
     { "Name": "EnhancedInput", "Enabled": true },
-    { "Name": "Niagara", "Enabled": true },
-    { "Name": "ModelingToolsEditorMode", "Enabled": true }
+    { "Name": "Niagara", "Enabled": true }
   ]
 }

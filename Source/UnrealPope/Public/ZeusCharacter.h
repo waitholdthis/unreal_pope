@@ -7,7 +7,6 @@
 class UCameraComponent;
 class USpringArmComponent;
 class UZeusInteractionComponent;
-struct FInputActionValue;
 
 UCLASS()
 class UNREALPOPE_API AZeusCharacter : public ACharacter
@@ -20,10 +19,6 @@ public:
 protected:
     virtual void BeginPlay() override;
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-    void Move(const FInputActionValue& Value);
-    void Look(const FInputActionValue& Value);
-    void Interact();
 
 private:
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Camera", meta=(AllowPrivateAccess="true"))
