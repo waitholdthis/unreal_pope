@@ -1,0 +1,18 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.7",
+  "Category": "Games",
+  "Description": "UE 5.7 cinematic gameplay prototype scaffold created by ZEUS.",
+  "Modules": [
+    {
+      "Name": "UnrealPope",
+      "Type": "Runtime",
+      "LoadingPhase": "Default"
+    }
+  ],
+  "Plugins": [
+    { "Name": "EnhancedInput", "Enabled": true },
+    { "Name": "Niagara", "Enabled": true },
+    { "Name": "ModelingToolsEditorMode", "Enabled": true }
+  ]
+}

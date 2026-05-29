@@ -1,0 +1,35 @@
+# Unreal Engine
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+.vs/
+.vscode/.browse.VC.db*
+.vscode/c_cpp_properties.json
+.vscode/compileCommands_*.json
+*.VC.db
+*.opensdf
+*.sdf
+*.suo
+*.user
+*.userosscache
+*.sln
+*.xcodeproj
+*.xcworkspace
+
+# Build output
+Build/*
+!Build/README.md
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.idea/
+
+# Logs/crashes
+*.log
+*.dmp
+
+# Keep source/config/content placeholders
+!Content/.gitkeep
+!Plugins/.gitkeep
