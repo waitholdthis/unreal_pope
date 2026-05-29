@@ -44,8 +44,16 @@ Manual rebuild:
 ```bash
 chmod +x Scripts/mac-rebuild.sh
 ./Scripts/mac-rebuild.sh
-open UnrealPope.uproject
 ```
+
+Then open through the helper so Unreal inherits the Xcode/Metal toolchain environment:
+
+```bash
+chmod +x Scripts/mac-open-editor.sh
+./Scripts/mac-open-editor.sh
+```
+
+If you prefer opening directly and the editor reports a missing Metal Toolchain, launch through `Scripts/mac-open-editor.sh` instead of double-clicking the `.uproject`.
 
 If your Unreal install is not in the default Launcher path, set `UNREAL_BUILD_SH` first:
 
