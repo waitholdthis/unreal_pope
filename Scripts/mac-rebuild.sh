@@ -54,6 +54,11 @@ MAC_SDK_JSON="$ENGINE_ROOT/Platforms/Mac/Config/SDK.json"
 if [[ ! -f "$MAC_PLATFORM_INFO" ]]; then
   echo "Missing Unreal Mac platform info: $MAC_PLATFORM_INFO" >&2
   echo "This Unreal install does not appear to include Mac platform support, or the install is incomplete." >&2
+  echo "Engine root detected as: $ENGINE_ROOT" >&2
+  echo "Existing Engine/Platforms entries:" >&2
+  ls -la "$ENGINE_ROOT/Platforms" 2>/dev/null || true
+  echo "Searching for DataDrivenPlatformInfo.ini under this engine:" >&2
+  find "$ENGINE_ROOT" -name DataDrivenPlatformInfo.ini -type f 2>/dev/null | sed 's/^/  /' || true
   echo "Open Epic Games Launcher > Unreal Engine > UE_5.7 > Options and make sure Mac platform support is installed, then Verify the engine install." >&2
   exit 2
 fi
