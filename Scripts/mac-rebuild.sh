@@ -48,7 +48,7 @@ if command -v xcodebuild >/dev/null 2>&1; then
 fi
 
 echo "Checking Unreal Mac platform support files..."
-ENGINE_ROOT="$(cd "$(dirname "$BUILD_SH")/../../../.." && pwd)"
+ENGINE_ROOT="$(cd "$(dirname "$BUILD_SH")/../../.." && pwd)"
 MAC_PLATFORM_INFO="$ENGINE_ROOT/Platforms/Mac/Config/DataDrivenPlatformInfo.ini"
 MAC_SDK_JSON="$ENGINE_ROOT/Platforms/Mac/Config/SDK.json"
 if [[ ! -f "$MAC_PLATFORM_INFO" ]]; then
